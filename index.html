@@ -1,825 +1,567 @@
-<!DOCTYPE HTML>
-<!--
-	Prologue by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<!doctype html>
+<html lang="en">
 <head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XC6N96E1QK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-V0ENH7520E');
-</script>
-  <title>Weatheritt Lab - Alternative Splicing, RNA and neuroscience</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>Weatheritt Lab | RNA biology and protein isoforms</title>
+  <meta name="description" content="The Weatheritt Lab at the Garvan Institute studies how alternative RNA processing expands protein function, with a major focus on how it fails in ALS.">
+  <!-- Social previews. Replace the og:url and og:image values with absolute URLs once the site's domain is known. -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Weatheritt Lab | RNA biology and protein isoforms">
+  <meta property="og:description" content="How alternative RNA processing expands protein function, and how it fails in ALS and cancer. Garvan Institute, UNSW Sydney and EMBL Australia.">
+  <meta property="og:image" content="assets/og-image.jpg">
+  <meta property="og:url" content="https://REPLACE-WITH-DOMAIN/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2308131a'/%3E%3Cpath d='M10 40h44' stroke='%2300b9a5' stroke-width='3'/%3E%3Crect x='8' y='34' width='12' height='12' rx='2' fill='%2300b9a5'/%3E%3Crect x='28' y='34' width='6' height='12' rx='2' fill='%23ef5b5b'/%3E%3Crect x='44' y='34' width='12' height='12' rx='2' fill='%2300b9a5'/%3E%3Cpath d='M20 34Q38 10 44 34' fill='none' stroke='%237ae8dc' stroke-width='3'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #536070;
+      --paper: #f7f5f0;
+      --white: #ffffff;
+      --night: #08131a;
+      --teal: #00b9a5;
+      --teal-dark: #007d73;
+      --coral: #ef5b5b;
+      --line: rgba(17, 24, 39, .14);
+      --max: 1180px;
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+    .wrap { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--teal-dark);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
+    h2 { margin: 0 0 24px; font-size: clamp(2rem, 5vw, 4rem); }
+    h3 { margin: 0 0 12px; font-size: 1.35rem; }
+    p { margin: 0 0 1.1em; }
+    .lead { max-width: 760px; color: var(--muted); font-size: clamp(1.08rem, 2vw, 1.35rem); }
+    .accent-line { width: 54px; height: 4px; margin: 22px 0 28px; border: 0; background: var(--coral); }
+
+    /* Sticky nav: transparent over the hero, solid once scrolled; hides on scroll-down on small screens */
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 50;
+      border-bottom: 1px solid rgba(255,255,255,.17);
+      color: var(--white);
+      transition: background .25s ease, transform .3s ease, border-color .25s ease;
+    }
+    .site-header.scrolled { background: rgba(8,19,26,.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom-color: rgba(255,255,255,.08); }
+    .site-header.scrolled .nav { min-height: 64px; }
+    .site-header.hidden { transform: translateY(-100%); }
+    .nav-links a[aria-current="true"] { color: var(--white); box-shadow: 0 2px 0 var(--teal); }
+    main section[id] { scroll-margin-top: 72px; }
+    .nav { min-height: 82px; transition: min-height .25s ease; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .brand { text-decoration: none; font-weight: 800; letter-spacing: -.02em; }
+    .brand span { display: block; color: rgba(255,255,255,.72); font-size: .72rem; font-weight: 650; letter-spacing: .13em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 26px; }
+    .nav-links a { color: rgba(255,255,255,.84); text-decoration: none; font-size: .92rem; font-weight: 650; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--white); }
+    .nav-toggle { display: none; border: 0; background: transparent; color: white; font: inherit; font-weight: 700; }
+
+    /* Hero: crisp vector gene model instead of an upscaled micrograph */
+    .hero {
+      min-height: 740px;
+      position: relative;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      color: var(--white);
+      background: var(--night);
+    }
+    .hero-art { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .hero-art .intron { stroke: rgba(122,232,220,.35); stroke-width: 1.5; }
+    .hero-art .exon { fill: var(--teal); opacity: .85; }
+    .hero-art .exon.micro { fill: var(--coral); opacity: 1; }
+    .hero-art .arc { fill: none; stroke: rgba(122,232,220,.55); stroke-width: 1.6; }
+    .hero-art .arc.alt { stroke: rgba(239,91,91,.75); }
+    .hero-art .read { stroke: rgba(0,185,165,.55); stroke-width: 5; stroke-linecap: round; }
+    .hero-art .read.micro { stroke: rgba(239,91,91,.8); }
+    .hero-art .readgap { stroke: rgba(255,255,255,.12); stroke-width: 1; }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(90deg, rgba(8,19,26,.97) 0%, rgba(8,19,26,.85) 38%, rgba(8,19,26,.15) 75%),
+        linear-gradient(0deg, rgba(8,19,26,.7), transparent 40%);
+    }
+    .hero-content { position: relative; z-index: 2; padding: 180px 0 92px; }
+    .hero-kicker { color: #7ae8dc; font-size: 1.02rem; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; }
+    h1 { max-width: 1000px; margin: 18px 0 26px; font-size: clamp(3.5rem, 8vw, 7rem); }
+    h1 .accent { color: var(--coral); }
+    .hero p { max-width: 660px; color: rgba(255,255,255,.82); font-size: clamp(1.12rem, 2.3vw, 1.4rem); }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 50px; padding: 0 22px;
+      border: 1px solid transparent; border-radius: 999px;
+      background: var(--teal); color: #041315;
+      text-decoration: none; font-weight: 800;
+      transition: background .18s ease;
+    }
+    .button:hover { background: #31d6c3; }
+    .button.secondary { border-color: rgba(255,255,255,.45); background: rgba(255,255,255,.08); color: white; }
+
+    .section { padding: 108px 0; }
+    .section.white { background: var(--white); }
+    .section.dark { background: var(--night); color: var(--white); }
+    .section.dark .lead { color: rgba(255,255,255,.68); }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(48px, 8vw, 110px); align-items: start; }
+    .prose { color: var(--muted); font-size: 1.08rem; }
+    .prose strong { color: var(--ink); }
+
+    /* Research themes: figures shown whole, text below */
+    .program-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 46px; }
+    .program-card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+    .program-figure { position: relative; overflow: hidden; aspect-ratio: 2 / 1; display: grid; place-items: center; padding: 22px 26px; background: var(--white); border-bottom: 1px solid var(--line); }
+    .program-figure img { width: 100%; height: 100%; object-fit: contain; }
+    .program-figure.photo { padding: 0; background: #000; }
+    .program-figure.photo picture { position: absolute; inset: 0; }
+    .program-figure.photo img { width: 100%; height: 100%; object-fit: cover; }
+    .program-figure.vector { padding: 0; background: var(--night); }
+    .program-figure.vector svg { width: 100%; height: 100%; }
+    .program-body { padding: 28px 30px 32px; }
+    .program-tag { display: block; margin-bottom: 10px; color: var(--teal-dark); font-size: .85rem; font-weight: 800; }
+    .program-body h3 { font-size: 1.5rem; }
+    .program-body p { margin: 0; color: var(--muted); }
+
+    .methods { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 42px; }
+    .method { min-height: 145px; padding: 22px; border: 1px solid rgba(255,255,255,.15); border-radius: 16px; }
+    .method svg { width: 30px; height: 30px; color: var(--teal); }
+    .method b { display: block; margin-top: 36px; font-size: .94rem; }
+
+    .publication-list { margin-top: 48px; border-top: 1px solid var(--line); }
+    .publication {
+      display: grid;
+      grid-template-columns: 105px 1fr 200px;
+      gap: 28px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+    }
+    .publication .year { color: var(--teal-dark); font-size: .9rem; font-weight: 800; }
+    .publication .title { font-weight: 750; line-height: 1.35; }
+    .publication .title > a { text-decoration-thickness: 1px; text-decoration-color: transparent; text-underline-offset: 4px; transition: color .18s ease, text-decoration-color .18s ease; }
+    .publication .title > a:hover, .publication .title > a:focus-visible { color: var(--teal-dark); text-decoration-color: currentColor; }
+    .publication .journal { color: var(--muted); font-size: .9rem; text-align: right; }
+    .publication small { display: block; margin-top: 8px; color: var(--muted); font-size: .86rem; font-weight: 400; }
+    .publication small b { color: var(--ink); font-weight: 700; }
+    .pub-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .chip {
+      display: inline-block; padding: 3px 10px;
+      border: 1px solid rgba(0,125,115,.25); border-radius: 999px;
+      color: var(--teal-dark); font-size: .74rem; font-weight: 800; letter-spacing: .03em; text-decoration: none;
+    }
+    a.chip:hover, a.chip:focus-visible { border-color: var(--teal-dark); background: rgba(0,185,165,.08); }
+    .chip.static { border-style: dashed; color: var(--muted); }
+    .more-link { margin-top: 28px; font-weight: 700; }
+
+    .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 52px; }
+    .person { margin: 0; }
+    .portrait {
+      aspect-ratio: 4 / 4.7; overflow: hidden;
+      display: grid; place-items: center;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #0b3840, #00a995);
+      color: white; font-size: 2.2rem; font-weight: 800; letter-spacing: -.06em;
+    }
+    .portrait picture, .portrait img { width: 100%; height: 100%; }
+    .portrait img { object-fit: cover; object-position: center top; }
+    .person figcaption { padding: 16px 4px 0; }
+    .person b { display: block; font-size: 1.03rem; }
+    .person span { color: var(--muted); font-size: .88rem; }
+
+    .alumni { margin-top: 72px; padding-top: 36px; border-top: 1px solid var(--line); }
+    .alumni h3 { margin-bottom: 24px; font-size: 1.5rem; }
+    .alumni-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 32px; margin: 0; padding: 0; list-style: none; }
+    .alumni-list li { padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .alumni-list b { display: block; font-size: 1rem; }
+    .alumni-list span { display: block; color: var(--muted); font-size: .88rem; }
+    .alumni-list .lab-role { color: var(--teal-dark); font-weight: 700; font-size: .82rem; margin: 2px 0 1px; }
+    .person-trigger { display: block; width: 100%; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+    .person-trigger .portrait { transition: transform .2s ease, box-shadow .2s ease; }
+    .person-trigger:hover .portrait, .person-trigger:focus-visible .portrait { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(8,19,26,.16); }
+    .person-meta { display: block; padding: 16px 4px 0; }
+    .person-meta b { display: block; font-size: 1.03rem; }
+    .person-meta > span { display: block; color: var(--muted); font-size: .88rem; }
+    .person-meta .more { margin-top: 6px; color: var(--teal-dark); font-size: .8rem; font-weight: 800; }
+    .bio-dialog { width: min(calc(100% - 32px), 720px); padding: 0; border: 0; border-radius: var(--radius); background: var(--white); color: var(--ink); box-shadow: 0 30px 80px rgba(0,0,0,.35); }
+    .bio-dialog::backdrop { background: rgba(3,9,13,.6); backdrop-filter: blur(3px); }
+    .bio-inner { position: relative; display: grid; grid-template-columns: 220px 1fr; gap: 30px; align-items: center; padding: 28px; }
+    .bio-photo .portrait { font-size: 2.6rem; }
+    .bio-inner h3 { margin: 0 0 14px; font-size: 1.7rem; }
+    .bio-inner .eyebrow { margin-bottom: 8px; }
+    .bio-inner p#bio-text { margin: 0; color: var(--muted); font-size: 1.05rem; }
+    .bio-close { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--paper); color: var(--ink); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+    .bio-close:hover { background: #e9e6df; }
+    @media (max-width: 560px) { .bio-inner { grid-template-columns: 1fr; gap: 18px; padding: 22px; } .bio-photo { width: 150px; } }
+    .pi-panel { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; align-items: center; }
+    .pi-photo { overflow: hidden; border-radius: var(--radius); background: #ccd3d5; }
+    .pi-photo img { width: 100%; aspect-ratio: 4 / 4.5; object-fit: cover; object-position: center top; }
+    .credential-list { margin: 28px 0 0; padding: 0; list-style: none; }
+    .credential-list li { padding: 12px 0; border-top: 1px solid var(--line); color: var(--muted); }
+    .credential-list strong { display: inline-block; min-width: 145px; color: var(--ink); }
+
+    .join { position: relative; overflow: hidden; border-radius: 28px; padding: clamp(36px, 8vw, 80px); background: var(--teal); color: #031516; }
+    .join::after { content: "RNA"; position: absolute; right: -20px; bottom: -68px; color: rgba(255,255,255,.22); font-size: clamp(7rem, 22vw, 18rem); font-weight: 900; line-height: 1; letter-spacing: -.1em; }
+    .join > * { position: relative; z-index: 1; }
+    .join > p { max-width: 670px; font-size: 1.15rem; }
+    .join-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 980px; margin: 34px 0 38px; }
+    .join-grid h3 { font-size: 1.1rem; letter-spacing: -.01em; }
+    .join-grid p { margin: 0; font-size: .98rem; }
+    .join .button { background: var(--night); color: white; }
+
+    footer { padding: 58px 0; background: #03090d; color: rgba(255,255,255,.7); }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 50px; }
+    footer h3 { color: white; }
+    footer a { color: inherit; text-underline-offset: 4px; }
+    .fineprint { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin-top: 42px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.12); font-size: .8rem; }
+    .fineprint p { margin: 0; max-width: 720px; }
+
+    @media (max-width: 900px) {
+      .nav-toggle { display: inline-block; }
+      .nav { min-height: 64px; }
+      .nav-links { position: absolute; top: calc(100% + 8px); left: 20px; right: 20px; display: none; padding: 22px; flex-direction: column; align-items: flex-start; border-radius: 16px; background: rgba(3,9,13,.97); }
+      .nav-links.open { display: flex; }
+      .hero { min-height: 660px; }
+      .hero::before { background: linear-gradient(0deg, rgba(8,19,26,.96) 30%, rgba(8,19,26,.55) 100%); }
+      .split, .pi-panel { grid-template-columns: 1fr; }
+      .program-grid { grid-template-columns: 1fr; }
+      .methods { grid-template-columns: repeat(2, 1fr); }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .publication { grid-template-columns: 72px 1fr; }
+      .publication .journal { grid-column: 2; text-align: left; }
+      .join-grid { grid-template-columns: 1fr; }
+      .alumni-list { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .wrap { width: min(calc(100% - 28px), var(--max)); }
+      .section { padding: 76px 0; }
+      h1 { font-size: clamp(3rem, 15vw, 4.5rem); }
+      .hero-kicker { font-size: .82rem; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .methods { grid-template-columns: 1fr; }
+      .alumni-list { grid-template-columns: 1fr; }
+      .method { min-height: 0; display: flex; align-items: center; gap: 16px; }
+      .method b { margin-top: 0; }
+      .publication { grid-template-columns: 1fr; gap: 8px; }
+      .publication .journal { grid-column: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  </style>
 </head>
-
-
-
-<html>
-	<head>
-		<title>Weatheritt Lab - Alternative Splicing, RNA and neuroscience</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-	</head>
-	<body>
-
-		<!-- Header -->
-			<div id="header">
-
-				<div class="top">
-
-					<!-- Logo -->
-						<div id="logo">
-							
-							<h1 id="title"><a href="#top" class="nounderline">Weatheritt Lab</h1>
-							<p><a href="http://www.emblaustralia.org/"  target="_blank" class="nounderline" >EMBL Australia</p>
-							<p><a href="http://garvan.org.au/"  target="_blank" class="nounderline" >Garvan Institute</p>
-						</div>
-
-					<!-- Nav -->
-						<nav id="nav">
-							<!--
-
-								Prologue's nav expects links in one of two formats:
-
-								1. Hash link (scrolls to a different section within the page)
-
-								   <li><a href="#foobar" id="foobar-link" class="icon fa-whatever-icon-you-want skel-layers-ignoreHref"><span class="label">Foobar</span></a></li>
-
-								2. Standard link (sends the user to another page/site)
-
-								   <li><a href="http://foobar.tld" id="foobar-link" class="icon fa-whatever-icon-you-want"><span class="label">Foobar</span></a></li>
-
-							-->
-							<ul>
-								<li><a href="#top" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-home">About</span></a></li>
-								<li><a href="#portfolio_2" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-newspaper-o">News</span></a></li>
-								<li><a href="#portfolio_1" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-flask">Research</span></a></li>
-								<li><a href="#portfolio" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-book">Publications</span></a></li>
-								<li><a href="#about" id="about-link" class="skel-layers-ignoreHref"><span class="icon fa-users">People</span></a></li>
-								<li><a href="#join" id="join-link" class="skel-layers-ignoreHref"><span class="icon fa-user">Join</span></a></li>
-								<li><a href="#contact" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-envelope">Contact</span></a></li>
-							</ul>
-						</nav>
-
-				</div>
-
-				<div class="bottom">
-
-					<!-- Social Icons -->
-						<ul class="icons">
-							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="http://scholar.google.ca/citations?user=SYVANKcAAAAJ&hl" target="_blank" class="icon fa-graduation-cap"><span class="label">Google Scholar</span></a></li>
-							<li><a href="http://garvan.org.au/"  target="_blank" class="icon fa-industry"><span class="label">EMBL Australia</span></a></li>
-							<li><a href="http://www.emblaustralia.org/"  target="_blank" class="icon fa-university"><span class="label">Garvan</span></a></li>
-							<li><a href="mailto:r.weatheritt@garvan.org.au?Subject=Hello Weatheritt Lab" class="icon fa-envelope"><span class="label">Email</span></a></li>
-							<li><a href="https://irbgroup.org/"  target="_blank" class="icon fa fa-universal-access"><span class="label">Garvan</span></a></li>
-							
-						</ul>
-
-				</div>
-
-			</div>
-
-		<!-- Main -->
-			<div id="main">
-
-				<!-- Intro -->
-					<section id="top" class="one dark cover">
-						<div class="container">
-
-							<header>
-								<h2 class="alt">Welcome to the <strong>Weatheritt</strong> lab website</h2>
-								<p>Our lab utilizes computational and molecular biology techniques to investigate how post-transcriptional processes, particularly alternative splicing, regulate protein function in Motor Neuron Diseases (MND) and other neurological disorders. Our goal is to uncover the root causes of these debilitating conditions and develop novel therapeutic interventions. <br /></p>
-								
-							</header>
-
-							<footer>
-								<a href="#portfolio_1" class="button scrolly">Learn More</a>
-							</footer>
-
-						</div>
-					</section>
-				<!-- Portfolio -->
-					<section id="portfolio_2" class="two">
-						<div class="container">
-
-							<header>
-								<h2>News</h2>
-							</header>
-
-							<div class="row">
-								<div class="11u 12u$(mobile)">
-										<article class="item">
-									<header>
-										<h5> - 2024/10 Isoform-specific therapeutics in <a href="https://www.nature.com/articles/s41573-024-01025-z" target="_blank"> Nature Review Drug Discovery </a>! Congratulations to Peter!</h5>
-										<h5> - 2023/12 Congratulations to Peter for publishing in <a href="https://www.nature.com/articles/s41594-023-01155-9" target="_blank"> Nature Structure and Molecular Biology</a> showing alternative splicing is central regulator of protein function with implications for almost every biological process</h5>
-										<h5> - 2023/03 Collaborative work in <a href="https://www.nature.com/articles/s41587-023-01714-x" target="_blank"> Nature Biotechnology</a> showing alternative splicing produces protein isoforms! Long term aim of Ben and I. Thank you Coon and Cox labs!</h5>
-										<h5> - 2022/11 A real privilege to be awarded the E.P. Oldham - Viertel Senior Medical Fellow. So many alumni I admire!</h5>
-										<h5> - 2022/08 Paper published in <a href="https://www.nature.com/articles/s41586-022-05054-9" target="_blank"> Nature</a>. Neofunctionalization of retrotransposons in the immune system. Congrats Nenad! Great collaboration with Cecile King's lab </h5>
-										<h5> - 2021/09 Paper published in <a href="https://elifesciences.org/articles/69148" target="_blank"> eLIFE</a>. We uncover the drivers of conserved (vs species-specific) circRNA formation in primates. Congrats Gaby! </h5>
-										<h5> - 2021/01 Paper published in <a href="https://rdcu.be/cdq8W" target="_blank"> Nature Communications</a>. We uncover interplay between regulatory layers in controlling neuronal fate. Congrats Kevin! </h5>
-										<h5> - 2020/05 Paper published in <a href="https://www.nature.com/articles/s41586-020-2188-x" target="_blank"> Nature</a> as part of the HURI consortium. </h5>
-										<h5> - 2020/02 Robert published a <a href="https://www.sciencedirect.com/science/article/pii/S109727652030006X" target="_blank"> Molecular Cell</a> paper with Blencowe lab. </h5>
-										<h5> - 2019/07 Paper published in <a href="https://rdcu.be/bKNei" target="_blank"> Genome Biology</a>. We uncover mechanisms controlling exonisation, which permit the emergence of lineage-specific regulation. 	</h5>
-										<h5> - 2019/01 Paper published in Nature Review Genetics. Always a pleasure collaborating with Ben, Mathieu and Sabine. <a href="https://www.nature.com/articles/s41576-018-0066-2" target="_blank"></br>Autism spectrum disorder: insights into convergent mechanisms from transcriptomics.</h5> </a>	
-										<h5> - 2018/07 Paper just published in Molecular Cell. Great working with Ben and Tim <a href="https://www.sciencedirect.com/science/article/pii/S1097276518306786" target="_blank"></br>Efficient and accurate quantitative profiling of alternative splicing patterns of any complexity on a laptop </h5>	</a>	
-									</header>
-									</article>
-
-								</div>
-							</div>
-							<header>
-						</div>
-							<div id="wrapper">
-							<a href="#portfolio_2" class = "img_pan" alt="img_pan"  ><img class="image img_pan" src="images/manly_landing.jpg" /></a>
-							</div>
-						</section>
-
-				<!-- Portfolio -->
-					<section id="portfolio_1" class="two">
-						<div class="container">
-
-							<header>
-								<h2>Research</h2>
-							</header>
-
-							<div class="row">
-								<div class="6u 12u$(mobile)">
-									<article class="item">
-									<header>
-										<h8>Lineage-specific alternative splicing and phenotypic complexity	</h8>		
-									</header>
-										<a href="#portfolio_1" class="image fit"><img src="images/brain_AS_v2.jpg" alt="" /></a>
-										<header>
-											<h5>Human have approximately 86 trillion neurons. C. elegans has exactly 302 neurons. Humans and C. elegans have approximately the same number of genes. How is this complexity encoded? We are interested in investigating how</h5>	
-										</header>
-										<header>
-											<h5> Relevant Publications:</h5>
-											<h5> Irimia et al. Cell 2014</h5>
-											<h5> Santos-Rodriguez et al. eLife 2021</h5>
-											<h5> Bartonicek et al. Nature 2022</h5>
-										</header>
-									</article>
-									<article class="item">
-									<header>
-										<h8>The function of membraneless organelles in cancer progression</h8>									
-									</header>
-										<a href="#portfolio_1" class="image fit"><img src="images/Disease2.png" alt="" /></a>
-										<header>
-											<h5> What is the impact of membraneless organelles on cellular phenotypes? Does splicing regulate the function of membraneless organelles? </h5>
-										</header>
-										<header>
-											<h5> <br />Relevant Publications:</h5>
-											<h5> Avgan et al. Genome Biology. 2019 </h5>
-											<h5> Gueroussov et al. Cell. 2017:</h5>
-											<h5> Weatheritt and Babu. Science 2013:</h5>
-										</header>
-
-									</article>
-								</div>
-								<div class="6u 12u$(mobile)">
-									</article>
-									<article class="item">
-										<header>
-										<h8>Alternative splicing and <br />the proteome</h8>
-									</header>
-										<a href="#portfolio_1" class="image fit"><img src="images/tissue_specific_ints_v2.jpg" alt="" /></a>
-										<header>
-											<h5>We previously demonstrated that tissue-specific alternative splicing rewires proteomic networks by targeting linear motifs within intrinsically disorder regions. How dynamic is this process? Is it regulated by cell signalling?  <br /></h5>
-										</header>
-										<header>
-											<h5> Relevant Publications:</h5>
-											<h5> Kjer Hansen and Weatheritt. NSMB. 2023</h5>
-											<h5> Weatheritt et al. NSMB. 2016</h5>
-											<h5> Sinitcyn et al. Nature Biotech </h5>
-										</header>
-										</article>
-										<article class="item">
-									<header>
-										<h8>Alternative splicing and high content imaging  </h8>		
-									</header>
-										<a href="#portfolio_1" class="image fit"><img src="images/ezgif.com-crop-12.png" alt="" /></a>
-										<header>
-											<h5>We use high content imaging studies combined with CRISPR technology to understand functional differences between proteins produced by alternative splicing. </h5>	
-										</header>
-										<header>
-											<h5> Irimia et al. Cell 2014</h5>
-											<h5> Kjer Hansen and Weatheritt. NSMB. 2023 </h5>
-										</header>
-									
-									</article>
-
-								</div>
-							</div>
-							<header>
-						</div>
-							<div id="wrapper">
-							<a href="#portfolio_1" class = "img_pan2" alt="img_pan2" ><img class="image img_pan" src="images/Sydney_Harbour_Bridge_night2.jpg" /></a>
-							</div>
-						</section>
-				<!-- Portfolio -->
-				
-					<section id="portfolio" class="two">
-
-						<div class="container">
-
-							<header>
-								<h2>Recent Publications</h2>
-							</header>
-
-							<div class="row">
-								<div class="4u 12u$(mobile)">
-									<article class="item">
-									<header>
-										<h8>Splicing and Evolution: how to create new exons  </h8>									
-									</header>
-										<a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1757-5" target="_blank" class="image fit"><img src="images/Figure6.jpg" alt="" /></a>
-										<header>
-											<h5> We identified a exonisation is controlled by a multilayered mechanism that modulates the "window of opportunity" for cryptic exon recognition. <br /> <br />Avgan et al. <br />Genome Biology (2019)</h5>
-										</header>
-									</article>
-								</div>
-								<div class="4u 12u$(mobile)">
-									<article class="item">
-										<header>
-										<h8>Expanding our view of transcriptome complexity</h8>
-									</header>
-										<a href="https://www.biorxiv.org/content/early/2017/07/03/158519" target="_blank" class="image fit"><img src="images/Whippet.jpg" alt="" /></a>
-										<header>
-											<h5>We've created a light-weight, lightening fast method for the quantitative profiling of AS from raw RNA-seq reads at the event-level (Whippet.jl). We identify >30% of human genome under complex splicing events and cancer genomes show more highly complex transcriptomes. <br /><br /> Sterne-Weiler, Weatheritt et al.<br /> Molecular Cell (2018)<br /></h5>
-										</header>
-									</article>
-								</div>
-								<div class="4u$ 12u$(mobile)">
-									<article class="item">
-									<header>
-										<h8>Splicing and Evolution: how to create new phenotypes</h8>									
-									</header>
-										<a href="http://www.cell.com/cell/fulltext/S0092-8674(17)30756-0" target="_blank" class="image fit"><img src="images/hnrnps.jpg" alt="" /></a>
-										<header>
-											<h5> We identified a series of mammalian-specific alternative splicing events that regulate higher order protein assemblies. This mechanism expands the regulatory complexity of mammalian transcriptomes and proteomes. <br /> <br />Gueroussov, Weatheritt et al. <br />Cell (2017)</h5>
-										</header>
-									</article>
-								</div>
-							</div>
-							<header>
-							<div id="wrapper">
-							<a href="#portfolio" class = "img_pan" alt="img_pan"  ><img class="image img_pan" src="images/sunset.jpg" /></a>
-							</div>
-								<h2>Full List of Publications</h2>
-							</header>							
-							<h6>
-•	<h7>By Journal</h7>: Cell (2), Nature (2), Science (1), Chemical Reviews (2), Nat Struc Biol (3), Mol Cell (6), PNAS (1), E-life (1), Nature Communication (1), Science Signal (1), TIBS (1), Protein Sci (1), Mol BioSyst (2), Curr Opin Stru (1), NAR (5), Bioinfomatics (1), Front Neuro (1), Hum Brain Mapp (1), Nature Review Genetics (1), Genome Biology (1), Nature Biotechnology (1), Nature Review Drug Discovery (1) <br />
-•	<h7>By year</h7>: 2024 (4), 2023 (4), 2022 (5), 2021 (2), 2020 (4), 2019 (2), 2018 (1), 2017 (2), 2016 (3), 2015 (1), 2014 (7), 2013 (4), 2012 (5), < 2012 (3)<br />
-<br /> <br />
-
-<h7>- Alternative splicing: regulation, biological significance and evolution <br /></h7>
-	1)  Kjer-Hansen P, Phan TG, <h7>Weatheritt RJ</h7>. Protein isoform-centric therapeutics: expanding targets and increasing specificity. <h7>Nat Rev Drug Discov.</h7> 2024 Oct;23(10):759-779. doi: 10.1038/s41573-024-01025-z
-	2)  Kjer-Hansen P, Weatheritt RJ. The function of alternative splicing in the proteome: rewiring protein interactomes to put old functions into new contexts. <h7>Nature Structural & Molecular Biology (NSMB)</h7> 2023 Nov 30.  doi: 10.1038/s41594-023-01155-9<br />
-	3)	Sinitcyn P, Richards AL, <h7>Weatheritt RJ</h7>, Brademan DR, Marx H, Meyer JG, Shishkvoa E, Hebert AS, Westphall MS, Blencowe BJ, Cox J, Coon JJ. Deep Human Proteome Sequencing for Global Detection of Mutations and Alternative Splicing. <h7>Nature Biotechnology</h7> 2023 Mar 23. doi: 10.1038/s41587-023-01714-x.<br />
-	4)	Skvortsova K, Bertrand S, Voronov D, Ducket PE, Ross SE, Magri MS, Maeso I, <h7>Weatheritt RJ</h7>, Skarmeta JLG, Arnone MI, Escriva H, Bogdanovic O. Active DNA demethylation of developmental cis-regulatory regions predates vertebrate origins <h7>Sci Adv.</h7> 2022 Dec 2;8(48):eabn2258<br />
-	5)	Bartonicek N, Rouet R, Warren J, Loetsch C, Santos-Rodriguez G, Walters S, Lin F, Zahra D,Blackburn J, Hammond GM, Reis ALM, Deveson IR, Zammit N, Zeraati M, Grey S, Christ D, Mattick JS, Chtanova T, Brink R, Dinger ME, <h7>Weatheritt RJ</h7>, Sprent J, King C. The retroelement Lx9 puts a brake on the immune response to virus infection. <h7>Nature</h7> 2022 Aug;608(7924):757-765.<br />
-	6)	Han H, Best AJ, Braunschweig U, Mikolajewicz N, Li JD, Roth J, Chowdhury F, Mantica F, Nabeel-Shah S, Parada G, Brown KR, O'Hanlon D, Wei J, Yao Y, Zid AA, Comsa LC, Jen M, Wang J, Datti A, Gonatopoulos-Pournatzis T, <h7>Weatheritt RJ</h7>, Greenblatt JF, Wrana JL, Irimia M, Gingras AC, Moffat J, Blencowe BJ. Systematic exploration of dynamic splicing networks reveals conserved multistage regulators of neurogenesis. <h7>Molecular Cell</h7> 2022 Aug 18;82(16):2982-2999.e14<br />
-	7)	<h7>Wang J</h7>, <h7>Weatheritt RJ</h7>, Voineagu I Alu-minating the Mechanisms Underlying Primate Cortex Evolution. <h7>Biol Psychiatry</h7> 2022 May 19:S0006-3223(22)01273-2<br />
-	8) Barutcu AR, Wu M, Braunschweig U, Dyakov BJA, Luo Z, Turner KM, Durbic T, Lin ZY, <h7>Weatheritt RJ</h7>, Maass PG, Gingras AC, Blencowe BJ. Systematic mapping of nuclear domain-associated transcripts reveals speckles and lamina as hubs of functionally distinct retained introns. <h7>Molecular Cell</h7>. 2022 Feb 9:S1097-2765(21)01072-8<br />
-	9) <h7>Santos-Rodriguez G</h7>, Voineagu I, <h7>Weatheritt RJ</h7>. Evolutionary dynamics of circular RNAs in primates. <h7> eLIFE </h7> 2021 Sep 20;10:e69148 <br />
-	10) Ha KCH, Sterne-Weiler T, Morris Q, <h7>Weatheritt RJ</h7>, Blencowe BJ. Differential contribution of transcriptomic regulatory layers in the definition of neuronal identity. <h7>Nature Communications </h7> 2021 Jan 12;12(1):335.<br />
-	11) Farini D, Cesari E, <h7>Weatheritt RJ</h7>, La Sala G, Naro C, Pagliarini V, Bonvissuto D, Medici V, Guerra M, Di Pietro C, Rizzo FR, Musella A, Carola V, Centonze D, Blencowe BJ, Marazziti D, Sette C.  A Dynamic Splicing Program Ensures Proper Synaptic Connections in the Developing Cerebellum. <h7>Cell Reports</h7> 2020 Jun 2;31(9):107703<br />
-	12) Luck K, Kim DK, Lambourne L, Spirohn K,..., <h7>Weatheritt RJ</h7> and HURI Consortium. <h7>Nature</h7>. 2020 Apr;580(7803):402-408A reference map of the human binary protein interactome. <br />
-	13) Rodrigues DC, Mufteev M, <h7>Weatheritt RJ</h7>, Djuric U, Ha KCH, Ross PJ, Wei W, Piekna A, Sartori MA, Byres L, Mok RSF, Zaslavsky K, Pasceri P, Diamandis P, Morris Q, Blencowe BJ, Ellis J. Shifts in Ribosome Engagement Impact Key Gene Sets in Neurodevelopment and Ubiquitination in Rett Syndrome. <h7>Cell Reports</h7>. 2020 Mar 24;30(12):4179-4196<br />
-
-	14) Gonatopoulos-Pournatzis T, Niibori R, Salter EW, <h7>Weatheritt RJ</h7>, Tsang B, Farhangmehr S, Liang X, Braunschweig U, Roth J, Zhang S, Henderson T, Sharma E, Quesnel-Vallières M, Permanyer J, Maier S, Georgiou J, Irimia M, Sonenberg N, Forman-Kay JD, Gingras AC, Collingridge GL, Woodin MA, Cordes SP, Blencowe BJ. Autism-Misregulated eIF4G Microexons Control Synaptic Translation and Higher Order Cognitive Functions. <h7>Molecular Cell</h7>. 2020 Jan 25. pii: S1097-2765(20)30006-X.<br />
-	
-	15) <h7>Avgan N</h7>, <h7>Wang JI</h7>, <h7>Fernandez-Chamorro J</h7>, <h7>Weatheritt RJ</h7>. Multilayered control of exon acquisition permits the emergence of novel forms of regulatory control. <h7>Genome Biology</h7>. 2019 Jul 17;20(1):141<br />
-   16)      Quesnel-Vallières M, <h7>Weatheritt RJ</h7>, Cordes SP, Blencowe BJ. Autism spectrum disorder: insights into convergent mechanisms from transcriptomics
-   		  <h7>Nat Rev Genetics</h7>. 2019 Jan;20(1):51-63  <br /> 
-   		  		- on cover!<br />
-
-   17)      Sterne-Weiler T*, <h7>Weatheritt RJ*</h7>, Best A, Ha KCH, Blencowe BJ. Whippet: an ultra fast and accurate  
-          alignment and quantification of RNA-seq data for analysis of alternative splicing. <h7>Molecular Cell</h7> 2018 Oct 4;72(1):187-200.e6  <br /> 
-    
-   18)    Gueroussov S*, <h7>Weatheritt RJ*</h7>, Sterne-Weiler T, O’Hanlon D, Lin ZY, Gingras AC, Blencowe BJ§.  
-Mammalian-specific regulation of higher-order hnRNP protein assemblies controls alternative splicing. <h7>Cell</h7>      
-2017 Jul 13;170(2):324-339.e23. <br />
-			- research highlighted by Nature Review Molecular Cell Biology<br />
-
-   19)    Han H, Braunschweig U, Gonatopoulos-Pournatzis T, <h7>Weatheritt RJ</h7>, Hirsch CL, Ha KCH, 
-          Radovani E, Nabell-Shah S, Sterne-Weiler T, Wang J, O’Hanlon D, Pan Q, Ray D, Vizeacoumar F, Datti A, 
-          Magomedova L, Cummins CL, Hughes TR, Greenblatt JF, Wrana JL, Moffat J, Blencowe BJ. Multilayered  
-          control of alternative splicing regulatory networks by transcription factors. <h7>Molecular Cell</h7>. 2017 Feb     
-          2;65(3):539-553.e7. <br />
-
-   20)    <h7>Weatheritt RJ</h7>, Sterne-Weiler T, Blencowe BJ. (2016) The ribosome-engaged landscape of alternative 
-          splicing. <h7>Nat Struct Mol Biol.</h7> 2016 Dec;23(12):1117-1123<br />
-
-   21)    Dominguez D, Tsai YH, <h7>Weatheritt R</h7>, Wang Y, Blencowe BJ, Wang Z. (2016) An extensive program of 
-          periodic alternative splicing linked to cell cycle progression. <h7>E-life.</h7> 2016 Mar 25;5<br />
-
-   22)    Irimia M, <h7>Weatheritt RJ</h7>, Ellis JD, Parikshak NN, Gonatopoulos-Pournatzis T,Babor M, Quesnel-Vallières   
-M, Tapial J, Raj B, O'Hanlon D, Barrios-Rodiles M, Sternberg MJ, Cordes SP, Roth FP, Wrana JL, Geschwind DH, Blencowe BJ. (2014) A highly conserved program of neuronal microexons is misregulatedin autistic brains. <h7>Cell</h7>. 159(7):1511-23	
-<br /> - perspective in Cell by Yang and Chen, and in EMBO Journal by Darnell. Research highlighted by Nature Review Neuroscience and Faculty of 1000<br />
-  
-   23)    Reyes A, Anders S, <h7>Weatheritt RJ</h7>, Gibson T.J, Steinmetz L, Huber W. (2013) Drift and conservation of  
-          differential exon usage across tissues in primate species. <h7>PNAS.</h7> 110(38)<br />
-
-   24)   <h7>Weatheritt RJ</h7>, Davey NE, Gibson TJ. (2012) Linear motifs confer functional diversity onto splice  
-          variants. <h7>Nucleic Acids Res</h7> 40, 7123-7131<br />
-- recommended reading by Nature Review Genetics<br />
-
-   25)    <h7>Weatheritt RJ</h7> and Gibson,TJ. (2012) Linear Motifs: Lost in (Pre)Translation <h7>Trends Biochem Sci</h7> i 37, 
-          333-341 [Review article]<br />
-<br />
-<h7>- Genomic and post-transcriptional regulation <br /></h7>
-   26)    Latysheva NS, Oates ME, Maddox L, Flock T, Gough J, Buljan M, <h7>Weatheritt RJ</h7>, Babu MM. (2016)      
-          Molecular Principles of Gene Fusion Mediated Rewiring of Protein Interaction Networks in Cancer.   
-          <h7>Molecular Cell.</h7> 2016 Aug 18;63(4):579-92<br />
- 
- 27)    <h7>Weatheritt RJ</h7>, Gibson TJ, Babu MM. (2014) Asymmetric mRNA localization contributes to fidelity
-          and sensitivity of spatially localized systems. <h7>Nat Struct Mol Biol.</h7> 21(9); 833-9<br />
-- research highlighted by Faculty of 1000 and by Nature.com<br />
-
- 28)    <h7>Weatheritt RJ</h7>, Babu MM. (2013) Evolution. The hidden codes that shape protein evolution. <h7>Science</h7>  
-          342(6164)<br />
-<br />
-<h7>- Intrinsically disordered regions and short linear motifs (SLiMs)<br /></h7>
- 29)    Latysheva NS, Flock T, <h7>Weatheritt RJ</h7>, Chavali S, Babu MM. (2015) How do disordered regions achieve   
-          comparable functions to structured domains? <h7>Protein Sci.</h7> 2015 Jun;24(6):909-22 [Review article]<br />
-
- 30)    Uyar B, <h7>Weatheritt RJ</h7>, Dinkel H, Davey NE, Gibson TJ. (2014) Proteome-wide analysis of human disease 
-          mutations in short linear motifs: neglected players in cancer? <h7>Mol BioSyst</h7>; 10(10): 2626-42<br />
-
- 31)    Van Roey K, Uyar, <h7>Weatheritt RJ</h7>, Dinkel H, Seiler M, Budd A, Gibson TJ, Davey NE. (2014) Short 
-          linear motifs: ubiquitous and functionally diverse protein interaction modules directing cell regulation.
-          <h7>Chemical Reviews.</h7> 114(13):6733-78 [Review article]<br />
-
- 32)    Van der Lee R, Buljan M*, Lang B*, <h7>Weatheritt RJ*</h7>, Daughdrill GW, Dunker AK, Fuxreiter M, Gough J,   
-          Gsponer J, Jones DT, Kim PM, Kriwacki RW, Oldfield CJ, Pappu RV, Tompa P, Uversky VN, Wright PE,  
-          Babu MM. (2014) Classification of Intrinsically Disordered Regions and Proteins. <h7>Chemical Reviews</h7> 114 
-           (13): 6589-631 [Review article]<br />
-
- 33)    Flock T*, <h7>Weatheritt RJ*</h7>, Latsheva NS, Babu MM§. (2014) Controlling entropy to tune the functions of  
-          intrinsically disordered regions. <h7>Curr Opin Struct Biol.</h7> 2014 Jun;26C:62-7 [Review article]<br />
-
- 34)    Dinkel H, Van Roey K, Michael S, Davey NE, <h7>Weatheritt RJ</h7>, Born D, Speck T, Krüger D, Grebnev G,   
-          Kuban M, Strumillo M, Uyar B, Budd A, Altenberg B, Seiler M, Chemes LB, Glavina J, Sánchez IE, Diella  
-          F, Gibson TJ.  (2014) The eukaryotic linear motif resource ELM: 10 years and counting. <h7>Nucleic Acids Res </h7>  
-          D259-66<br />
-
- 35)    Van Roey K, Dinkel H*, <h7>Weatheritt, RJ*</h7>, Gibson TJ, Davey NE. (2013) The switches.ELM resource: a     
-          compendium of conditional regulatory interfaces within the intrinsically disordered proteome.  <h7>Science  
-          Signaling.</h7> 6(269): rs7<br />
-
- 36)    <h7>Weatheritt RJ</h7>, Jehl P, Dinkel H, Gibson TJ. (2012) iELM – a web server to explore short linear motif          
-         mediated interactions <h7>Nucleic Acids Res.</h7> doi: 40, W364-9<br />
-
- 37)    <h7>Weatheritt RJ</h7>, Luck K, Petsalaki E, Davey NE, Gibson TJ. (2012) The identification of short linear motif
-          mediated interfaces within the human interactome <h7>Bioinformatics</h7> 28(7):976-982<br />
-
- 38)    Davey NE, Van Roey K*, <h7>Weatheritt RJ*</h7>, Toedt G, Uyar B, Altenberg B, Budd A, Diella F, Dinkel H, 
-          Gibson TJ. (2012) Attributes of short linear motifs. <h7>Mol Biosyst</h7> 8, 268-281.<br />
-
- 39)    Dinkel H, Michael S, <h7>Weatheritt RJ</h7>, Davey NE, Van Roey K, Altenberg B, Toedt G, Uyar B, Seiler M, 
-          Budd A, Jodicke L, Dammert MA, Schroeter C, Hammer M, Schmidt T, Jehl P, McGuigan C, Dymecka M, 
-          Chica C, Luck K, Via A, Chatr-Aryamontri A, Haslam N, Grebnev G, Edwards RJ, Steinmetz MO,
-          Meiselbach H, Diella F, Gibson TJ. (2012) ELM--the database of eukaryotic linear motifs. <h7>Nucleic Acids 
-          Res</h7> 40, D242-D251.<br />
-	
- 40)    Gould CM, Diella F, Via A, Puntervoll P, Gemund C, Chabanis-Davidson S, Michael S, Sayadi A, Bryne 
-          JC, Chica C, Seiler M, Davey NE, Haslam N, <h7>Weatheritt RJ</h7>, Budd A, Hughes T, Pas J, Rychlewski L, 
-          Trave G, Aasland R, Helmer-Citterich M, Linding R, Gibson TJ. (2010) ELM: the status of the 2010 
-          eukaryotic linear motif resource. <h7>Nucleic Acids Res</h7> 38, D167-80.<br />
-<br />
-<h7>- Neuroscience <br /></h7>
- 41)    Yanashima R, Kitagawa N, Matsubara Y, <h7>Weatheritt R</h7>, Oka K, Kikuchi S, Tomita M, Ishizaki S. (2009) 
-          Network Features and Pathway Analyses of a Signal Transduction Cascade. <h7>Front Neuroinform</h7> 3, 13.<br />
-
- 42)    Krumbholz K, Nobis EA, <h7>Weatheritt RJ</h7>, Fink GR. (2009) Executive control of spatial attention shifts in 
-          the auditory compared to the visual modality. <h7>Hum Brain Mapp</h7> 30, 1457-146<br />
-
-						</div>
-					</section>
-
-				<!-- People -->
-					<section id="about" class="three">
-						<div class="container">
-
-							<header>
-								<h2>People</h2>
-							</header>
-							<div class="row">
-								<div class="4u 4u$(mobile)">
-									<article class="item" style = "width:100%">
-										<a href="#about" class="image fit"><img src="images/temp_photo2.jpg" alt="" /></a>
-									<header>
-										<h8>Robert Weatheritt	</h8>	
-										<h5>EMBL Australia Group Leader</h5>	
-									</header>
-										<header>
-										<h5><h7>Education:</h7>	University of York (MRes), EMBL Heidelberg (PhD), MRC Laboratory of Molecular Biology and Donnelly Centre (PostDoc)
-										</br>
-										<h7>Hometown:</h7> London, England
-										</br>
-										<h7>Other activities:</h7> Diving, Sailing, Squash</h5>										
-									
-										<div class="container" style = "width:100%;min-width:100px">
-										<h9>Doing things that PIs do </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:60%">
-										      60%
-										    </div>										    
-										  </div>
-										  <h9>Experiments </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:30%">
-										      30%
-										    </div>
-										  </div>
-										  <h9>Admin </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:20%">
-										      20%
-										    </div>
-										  </div>										  
-										</div>
-										</header>
-									</article>
-									</div>
-								<div class="4u 4u$(mobile)">	
-									<article class="item">
-										<a href="#about" class="image fit"><img src="images/Foto_Grazi_Garvan.jpg" alt="" /></a>									
-									<header>
-										<h8>Grazi Vieira </h8>	
-										<h5> Lab Manager </h5>	
-									</header>
-										<header>
-										<h5><h7>Education:</h7>	Federal University of Ouro Preto (MSc), Federal University of Minas Gerais (PhD)
-										</br>
-										<h7>Hometown:</h7> Belo Horizonte/Minas Gerais - Brazil.
-										</br>
-										<h7>Other activities:</h7> Rock Climbing, Capoeira, Yoga, dancing Forró </h5>										
-										<br />
-										<div class="container" style = "width:100%;min-width:50px">
-										<h9>Managing the Lab  </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">
-										      50%
-										    </div>										    
-										  </div>
-										  <h9> Exciting Experiments</h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">
-										      50%
-										    </div>
-										  </div>
-										  <h9>Appreciating every minute of life </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
-										      100%
-										    </div>
-										  </div>										  
-										</div>
-										</header>
-									</article>
-									</div>
-								<div class="4u 4u$(mobile)">	
-									<article class="item">
-										<a href="#about" class="image fit"><img src="images/image001_haeyam_v2.jpg" alt="" /></a>									
-									<header>
-										<h8>Haeyam Taiy </h8>	
-										<h5>Research Intern</h5>	
-									</header>
-										<header>
-										<h5><h7>Education:</h7>	University of Cambridge (MPhil) University of Huddersfield (BSc Honours)
-										</br>
-										<h7>Hometown:</h7> Leeds, England
-										</br>
-										<h7>Other activities:</h7> Exploring new places, Hiking and Reading </h5>										
-										<br />
-										<div class="container" style = "width:100%;min-width:50px">
-										<h9>Automating AlphaFold </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%">
-										      60%
-										    </div>										    
-										  </div>
-										  <h9> Researching the NF-κB pathway</h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:30%">
-										      30%
-										    </div>
-										  </div>
-										  <h9>Looking at protein structures </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:20%">
-										      20%
-										    </div>
-										  </div>										  
-										</div>
-										</header>
-									</article>
-									</div>
-								<div class="4u 4u$(mobile)">	
-									<article class="item">
-										<a href="#about" class="image fit"><img src="images/HelenKing1.png" alt="" /></a>									
-									<header>
-										<h8>Helen King </h8>	
-										<h5> PhD Student </h5>	
-									</header>
-										<header>
-										<h5><h7>Education:</h7>	King's College London (BSc & MRes)
-										</br>
-										<h7>Hometown:</h7> Windsor, UK.
-										</br>
-										<h7>Other activities:</h7> Basketball, Yoga, Attempting Ottolenghi recipes </h5>										
-										<br />
-										<div class="container" style = "width:100%;min-width:50px">
-										<h9>Reading papers on transcriptomics  </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width:40%">
-										      25%
-										    </div>										    
-										  </div>
-										  <h9> Handling transcriptomics data </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:50%">
-										      80%
-										    </div>
-										  </div>
-										  <h9>Finding my way to Sydney </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width:20%">
-										      5%
-										    </div>
-										  </div>										  
-										</div>
-										</header>
-									</article>
-									</div>
-								<div class="4u 4u$(mobile)">	
-									<article class="item">
-										<a href="#about" class="image fit"><img src="images/PKH_portrait2.jpg" alt="" /></a>									
-									<header>
-										<h8>Peter Kjer Hansen </h8>	
-										<h5> Postdoc </h5>	
-									</header>
-										<header>
-										<h5><h7>Education:</h7>	University of Copenhagen (BSc and MSc)
-										</br>
-										<h7>Hometown:</h7> Copenhagen, Denmark.
-										</br>
-										<h7>Other activities:</h7> Exploring newer music history, reading actual books, and coffee </h5>										
-										<br />
-										<div class="container" style = "width:100%;min-width:50px">
-										<h9>Experiments  </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
-										      70%
-										    </div>										    
-										  </div>
-										  <h9> Reading about isoform-specific therapeutics</h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:30%">
-										      30%
-										    </div>
-										  </div>
-										  <h9> Moving my belongings across Sydney </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:10%">
-										      10%
-										    </div>
-										  </div>										  
-										</div>
-										</header>
-									</article>
-									</div>
-								<div class="4u 4u$(mobile)">	
-									<article class="item">
-										<a href="#about" class="image fit"><img src="images/Unknown-4_Mac.jpg" alt="" /></a>									
-									<header>
-										<h8>Macarena Pavez </h8>	
-										<h5> Postdoctoral Fellow </h5>	
-									</header>
-										<header>
-										<h5><h7>Education:</h7>	University of Tasmania (PhD)
-										</br>
-										<h7>Hometown:</h7> Hobart. Tasmania / Puerto Montt, Chile
-										</br>
-										<h7>Other activities:</h7> Hiking, dancing, walking my cat </h5>										
-										<br />
-										</br>
-										<div class="container" style = "width:100%;min-width:50px">
-										<h9>Growing iPSCs into neurons </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:80%">
-										      80%
-										    </div>										    
-										  </div>
-										  <h9> Praying to cell culture deities to keep cells happy </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:20%">
-										      20%
-										    </div>
-										  </div>
-										  <h9>Walking staircases of institute </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:10%">
-										      10%
-										    </div>
-										  </div>										  
-										</div>
-										</header>
-									</article>
-									</div>
-								<div class="4u 4u$(mobile)">	
-									<article class="item">
-										<a href="#about" class="image fit"><img src="images/Yohaann.png" alt="" /></a>									
-									<header>
-										<h8>Yohaann Mohamed Asif Jafrani </h8>	
-										<h5> Postdoctoral Fellow </h5>	
-									</header>
-										<header>
-										<h5><h7>Education:</h7>	University of Queensland (PhD)
-										</br>
-										<h7>Hometown:</h7> India
-										</br>
-										<h7>Other activities:</h7> Hiking, dancing </h5>										
-										<br />
-										</br>
-										<div class="container" style = "width:100%;min-width:50px">
-										<h9>Experiments - cloning and APEX </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:80%">
-										      80%
-										    </div>										    
-										  </div>
-										  <h9> Learning about condensates </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:20%">
-										      20%
-										    </div>
-										  </div>
-										  <h9>Helping others </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:10%">
-										      10%
-										    </div>
-										  </div>										  
-										</div>
-										</header>
-									</article>
-									</div>									
-								<div class="4u 4u$(mobile)">	
-									<article class="item">
-										<a href="#about" class="image fit"><img src="images/WebsitePhoto_Annelies.jpg" alt="" /></a>									
-									<header>
-										<h8>Annelies Hardiman </h8>	
-										<h5> Research Assistant </h5>	
-									</header>
-										<header>
-										<h5><h7>Education:</h7>	University of Auckland (BSc & MSc)
-										</br>
-										<h7>Hometown:</h7> Auckland, New Zealand
-										</br>
-										<h7>Other activities:</h7> Photography, hiking, exploring new places </h5>										
-										<br />
-										<div class="container" style = "width:100%;min-width:50px">
-										<h9>Single cell analysis </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:80%">
-										      80%
-										    </div>										    
-										  </div>
-										  <h9> Downloading sequences and packages  </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:20%">
-										      20%
-										    </div>
-										  </div>
-										  <h9>Loading up on caffeine </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:10%">
-										      10%
-										    </div>
-										  </div>										  
-										</div>
-										</header>
-									</article>
-									</div>									
-								<div class="4u 4u$(mobile)">	
-									<article class="item">
-										<a href="#about" class="image fit"><img src="images/Daisy_IMG_20230506_185227_v2.jpg" alt="" /></a>									
-									<header>
-										<h8>Daisy Kavanagh </h8>	
-										<h5> PhD student </h5>	
-									</header>
-										<header>
-										<h5><h7>Education:</h7>	Trinity College Dublin (BSc Honours)
-										</br>
-										<h7>Hometown:</h7> Naas, Ireland
-										</br>
-										<h7>Other activities:</h7> Discovering new music, thrift shopping, videogames </h5>										
-										<br />
-										<div class="container" style = "width:100%;min-width:50px">
-										<h9>Running Analysis </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:80%">
-										      80%
-										    </div>										    
-										  </div>
-										  <h9> Staring at equations </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:20%">
-										      20%
-										    </div>
-										  </div>
-										  <h9>Enjoying the A/C </h9>
-										  <div class="progress">
-										    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:10%">
-										      10%
-										    </div>
-										  </div>										  
-										</div>
-										</header>
-									</article>
-									</div>
-						</div>
-					</section>
-				<!-- Join -->
-					<section id="join" class="three_a">
-						<div class="container">
-
-							<header>
-								<h2>Join us </h2>
-							</header>
-
-							<a href="#join" class="image featured"><img src="images/garvan-staff3.jpg" alt="" /></a>
-							<h3> Postdocs </h3>
-							<p> If you are interested in our research and you have a recent PhD degree in molecular biology, proteomics/genomics, computation biology, neuroscience or 
-							bioinformatics, please send an email to Robert explaining your research interests (also include your CV and contact details 
-							of three references). We are always interested in motivated candidates. Potential candidates who are interested in joining us should be competitive to apply for 
-							external fellowships and sources of funding such as the ARC fellowship, NHMRC fellowship,  Marie-Curie Fellowship or HFSP Fellowship. </p>
-							<h3> Graduate students </h3>
-							<p> If you are interested in joining the lab or doing a master's project, please send Robert an email (r.weatheritt@garvan.org.au) or come by his office. 
-							Also, have a look at the <a href="https://www.garvan.org.au/careers/students/postgraduate-studies" target="_blank"> Garvan institute graduate programme</a> or 
-							<a href="http://www.emblaustralia.org/phd-program" target="_blank"> EMBL Australia Partnership PhD Program</a> for information about the application 
-							process.</p>
-							<h3> Undergraduate students </h3>
-							<p> We may have openings for undergraduate students. If you are interested, please send Robert an email with a short explanation of your interests. 
-							Please attach your transcript and CV in the email. 
-							Also, have a look at the <a href="https://www.garvan.org.au/careers/students/undergraduate-research-opportunity-program-urop" target="_blank"> Garvan institute undergraduate programme</a> for more information.</p>
-
-						</div>
-					</section>
-
-				<!-- Contact -->
-					<section id="contact" class="four">
-						<div class="container">
-
-							<header>
-								<h2>Contact</h2>
-							</header>
-							<header>
-							<span class="icon fa-envelope">  Email: r.weatheritt@garvan.org.au </span><p>Or visit us at the Garvan:</p>
-							</header>
-							<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.4593502308317!2d151.21870928021696!3d-33.87782175916218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae11d19f5841%3A0xc18482ee90d6e232!2sGarvan+Institute+of+Medical+Research!5e0!3m2!1sen!2sca!4v1512652503915" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-						</div>
-					</section>
-
-			</div>
-
-		<!-- Footer -->
-			<div id="footer">
-
-				<!-- Copyright -->
-					<ul class="copyright">
-						<li>&copy; Robert Weatheritt. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollzer.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
-
-	</body>
+<body>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Primary navigation">
+      <a class="brand" href="#top">Weatheritt Lab<span>RNA biology · Sydney</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <div class="nav-links" id="nav-links">
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#pi">Lab head</a>
+        <a href="#people">People</a>
+        <a href="#join">Join</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <svg class="hero-art" viewBox="0 0 1200 760" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" focusable="false">
+<defs><radialGradient id="glow" cx="72%" cy="45%" r="45%"><stop offset="0" stop-color="#00b9a5" stop-opacity=".22"/><stop offset="1" stop-color="#00b9a5" stop-opacity="0"/></radialGradient></defs>
+<rect width="1200" height="760" fill="url(#glow)"/>
+<g class="model"><line class="intron" x1="600" y1="250" x2="1170" y2="250"/><path class="arc" d="M644,243 Q678.0,212.76 712,243"/><path class="arc alt" d="M746,243 Q772.0,215.64 798,243"/><path class="arc alt" d="M808,243 Q833.0,216.0 858,243"/><path class="arc" d="M900,243 Q930.0,214.2 960,243"/><path class="arc" d="M998,243 Q1026.0,214.92000000000002 1054,243"/><path class="arc" d="M1096,243 Q1113.0,218.88 1130,243"/><rect class="exon" x="600" y="243" width="44" height="14" rx="2"/><rect class="exon" x="712" y="243" width="34" height="14" rx="2"/><rect class="exon micro" x="798" y="243" width="10" height="14" rx="2"/><rect class="exon" x="858" y="243" width="42" height="14" rx="2"/><rect class="exon" x="960" y="243" width="38" height="14" rx="2"/><rect class="exon" x="1054" y="243" width="42" height="14" rx="2"/><rect class="exon" x="1130" y="243" width="40" height="14" rx="2"/><line class="intron" x1="600" y1="328" x2="1170" y2="328"/><path class="arc" d="M644,321 Q678.0,290.76 712,321"/><path class="arc alt" d="M746,321 Q802.0,282.84000000000003 858,321"/><path class="arc" d="M900,321 Q930.0,292.2 960,321"/><path class="arc" d="M998,321 Q1026.0,292.92 1054,321"/><path class="arc" d="M1096,321 Q1113.0,296.88 1130,321"/><rect class="exon" x="600" y="321" width="44" height="14" rx="2"/><rect class="exon" x="712" y="321" width="34" height="14" rx="2"/><rect class="exon" x="858" y="321" width="42" height="14" rx="2"/><rect class="exon" x="960" y="321" width="38" height="14" rx="2"/><rect class="exon" x="1054" y="321" width="42" height="14" rx="2"/><rect class="exon" x="1130" y="321" width="40" height="14" rx="2"/><line class="intron" x1="600" y1="406" x2="1170" y2="406"/><path class="arc" d="M644,399 Q678.0,368.76 712,399"/><path class="arc alt" d="M746,399 Q772.0,371.64 798,399"/><path class="arc alt" d="M808,399 Q833.0,372.0 858,399"/><path class="arc" d="M900,399 Q977.0,353.28 1054,399"/><path class="arc" d="M1096,399 Q1113.0,374.88 1130,399"/><rect class="exon" x="600" y="399" width="44" height="14" rx="2"/><rect class="exon" x="712" y="399" width="34" height="14" rx="2"/><rect class="exon micro" x="798" y="399" width="10" height="14" rx="2"/><rect class="exon" x="858" y="399" width="42" height="14" rx="2"/><rect class="exon" x="1054" y="399" width="42" height="14" rx="2"/><rect class="exon" x="1130" y="399" width="40" height="14" rx="2"/><line class="intron" x1="600" y1="484" x2="1170" y2="484"/><path class="arc alt" d="M644,477 Q751.0,420.48 858,477"/><path class="arc" d="M900,477 Q930.0,448.2 960,477"/><path class="arc" d="M998,477 Q1026.0,448.92 1054,477"/><path class="arc" d="M1096,477 Q1113.0,452.88 1130,477"/><rect class="exon" x="600" y="477" width="44" height="14" rx="2"/><rect class="exon" x="858" y="477" width="42" height="14" rx="2"/><rect class="exon" x="960" y="477" width="38" height="14" rx="2"/><rect class="exon" x="1054" y="477" width="42" height="14" rx="2"/><rect class="exon" x="1130" y="477" width="40" height="14" rx="2"/><line class="readgap" x1="644" y1="590" x2="712" y2="590"/><line class="readgap" x1="746" y1="590" x2="798" y2="590"/><line class="readgap" x1="808" y1="590" x2="858" y2="590"/><line class="readgap" x1="900" y1="590" x2="1054" y2="590"/><line class="read" x1="600" y1="590" x2="644" y2="590"/><line class="read" x1="712" y1="590" x2="746" y2="590"/><line class="read micro" x1="798" y1="590" x2="808" y2="590"/><line class="read" x1="858" y1="590" x2="900" y2="590"/><line class="read" x1="1054" y1="590" x2="1096" y2="590"/><line class="readgap" x1="644" y1="602" x2="712" y2="602"/><line class="readgap" x1="746" y1="602" x2="798" y2="602"/><line class="readgap" x1="808" y1="602" x2="858" y2="602"/><line class="readgap" x1="900" y1="602" x2="960" y2="602"/><line class="readgap" x1="998" y1="602" x2="1054" y2="602"/><line class="readgap" x1="1096" y1="602" x2="1130" y2="602"/><line class="read" x1="600" y1="602" x2="644" y2="602"/><line class="read" x1="712" y1="602" x2="746" y2="602"/><line class="read micro" x1="798" y1="602" x2="808" y2="602"/><line class="read" x1="858" y1="602" x2="900" y2="602"/><line class="read" x1="960" y1="602" x2="998" y2="602"/><line class="read" x1="1054" y1="602" x2="1096" y2="602"/><line class="read" x1="1130" y1="602" x2="1170" y2="602"/><line class="readgap" x1="746" y1="614" x2="798" y2="614"/><line class="readgap" x1="808" y1="614" x2="858" y2="614"/><line class="readgap" x1="900" y1="614" x2="960" y2="614"/><line class="readgap" x1="998" y1="614" x2="1054" y2="614"/><line class="readgap" x1="1096" y1="614" x2="1130" y2="614"/><line class="read" x1="712" y1="614" x2="746" y2="614"/><line class="read micro" x1="798" y1="614" x2="808" y2="614"/><line class="read" x1="858" y1="614" x2="900" y2="614"/><line class="read" x1="960" y1="614" x2="998" y2="614"/><line class="read" x1="1054" y1="614" x2="1096" y2="614"/><line class="read" x1="1130" y1="614" x2="1170" y2="614"/><line class="readgap" x1="808" y1="626" x2="858" y2="626"/><line class="readgap" x1="900" y1="626" x2="960" y2="626"/><line class="read micro" x1="798" y1="626" x2="808" y2="626"/><line class="read" x1="858" y1="626" x2="900" y2="626"/><line class="read" x1="960" y1="626" x2="998" y2="626"/><line class="readgap" x1="644" y1="638" x2="712" y2="638"/><line class="readgap" x1="746" y1="638" x2="798" y2="638"/><line class="readgap" x1="808" y1="638" x2="858" y2="638"/><line class="readgap" x1="900" y1="638" x2="960" y2="638"/><line class="readgap" x1="998" y1="638" x2="1054" y2="638"/><line class="read" x1="600" y1="638" x2="644" y2="638"/><line class="read" x1="712" y1="638" x2="746" y2="638"/><line class="read micro" x1="798" y1="638" x2="808" y2="638"/><line class="read" x1="858" y1="638" x2="900" y2="638"/><line class="read" x1="960" y1="638" x2="998" y2="638"/><line class="read" x1="1054" y1="638" x2="1096" y2="638"/><line class="readgap" x1="644" y1="650" x2="858" y2="650"/><line class="readgap" x1="900" y1="650" x2="960" y2="650"/><line class="read" x1="600" y1="650" x2="644" y2="650"/><line class="read" x1="858" y1="650" x2="900" y2="650"/><line class="read" x1="960" y1="650" x2="998" y2="650"/><line class="readgap" x1="808" y1="662" x2="858" y2="662"/><line class="readgap" x1="900" y1="662" x2="960" y2="662"/><line class="readgap" x1="998" y1="662" x2="1054" y2="662"/><line class="read micro" x1="798" y1="662" x2="808" y2="662"/><line class="read" x1="858" y1="662" x2="900" y2="662"/><line class="read" x1="960" y1="662" x2="998" y2="662"/><line class="read" x1="1054" y1="662" x2="1096" y2="662"/><line class="readgap" x1="808" y1="674" x2="858" y2="674"/><line class="readgap" x1="900" y1="674" x2="960" y2="674"/><line class="read micro" x1="798" y1="674" x2="808" y2="674"/><line class="read" x1="858" y1="674" x2="900" y2="674"/><line class="read" x1="960" y1="674" x2="998" y2="674"/><line class="readgap" x1="900" y1="686" x2="960" y2="686"/><line class="readgap" x1="998" y1="686" x2="1054" y2="686"/><line class="readgap" x1="1096" y1="686" x2="1130" y2="686"/><line class="read" x1="858" y1="686" x2="900" y2="686"/><line class="read" x1="960" y1="686" x2="998" y2="686"/><line class="read" x1="1054" y1="686" x2="1096" y2="686"/><line class="read" x1="1130" y1="686" x2="1170" y2="686"/><line class="readgap" x1="808" y1="698" x2="858" y2="698"/><line class="readgap" x1="900" y1="698" x2="960" y2="698"/><line class="readgap" x1="998" y1="698" x2="1054" y2="698"/><line class="readgap" x1="1096" y1="698" x2="1130" y2="698"/><line class="read micro" x1="798" y1="698" x2="808" y2="698"/><line class="read" x1="858" y1="698" x2="900" y2="698"/><line class="read" x1="960" y1="698" x2="998" y2="698"/><line class="read" x1="1054" y1="698" x2="1096" y2="698"/><line class="read" x1="1130" y1="698" x2="1170" y2="698"/><line class="readgap" x1="644" y1="710" x2="858" y2="710"/><line class="readgap" x1="900" y1="710" x2="960" y2="710"/><line class="read" x1="600" y1="710" x2="644" y2="710"/><line class="read" x1="858" y1="710" x2="900" y2="710"/><line class="read" x1="960" y1="710" x2="998" y2="710"/></g></svg>
+      <div class="hero-content wrap">
+        <div class="hero-kicker">Alternative splicing · Protein isoforms · ALS</div>
+        <h1>One gene,<br><span class="accent">many proteins.</span></h1>
+        <p>Most genes produce multiple protein isoforms with distinct functions. We study what these isoforms do, how their misregulation drives neurodegeneration and cancer, and how they could be selectively targeted. Our major focus is ALS, where we ask how disrupted RNA processing leaves motor neurons vulnerable.</p>
+        <div class="hero-actions">
+          <a class="button" href="#research">Explore our research</a>
+          <a class="button secondary" href="#join">Work with us</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white" aria-labelledby="about-title">
+      <div class="wrap">
+        <div class="split">
+          <div>
+            <p class="eyebrow">Who we are</p>
+            <h2 id="about-title">From RNA mechanism to disease biology.</h2>
+            <hr class="accent-line">
+          </div>
+          <div class="prose">
+            <p>The Weatheritt Lab is a multidisciplinary RNA biology group at the Garvan Institute of Medical Research and UNSW Sydney, and part of EMBL Australia.</p>
+            <p>Our work asks how cells expand biological function beyond the information encoded in genes. We focus on alternative RNA processing, protein isoforms and biomolecular condensates, and we build computational and long-read methods to measure them at the level of whole transcripts and single cells.</p>
+            <p><strong>Motor neuron disease is a major focus of the lab.</strong> We apply these isoform-level approaches to ALS, asking how disrupted RNA processing changes the protein landscape of vulnerable neurons and where it might be corrected.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="research" aria-labelledby="research-title">
+      <div class="wrap">
+        <p class="eyebrow">Research program</p>
+        <h2 id="research-title">The molecular logic of RNA in health and disease.</h2>
+        <p class="lead">We connect transcript-level changes to protein behaviour and cellular phenotype, combining discovery-scale approaches with focused mechanistic experiments.</p>
+
+        <div class="program-grid">
+          <article class="program-card">
+            <div class="program-figure photo"><picture><source type="image/webp" srcset="assets/motor-neuron.webp"><img src="assets/motor-neuron.jpg" width="1200" height="600" loading="lazy" alt="Immunofluorescence image of a stem cell-derived neuron expressing dCas9, with branching neurites"></picture></div>
+            <div class="program-body">
+              <span class="program-tag">ALS and motor neuron disease</span>
+              <h3>Why do motor neurons fail?</h3>
+              <p>We use long-read sequencing of patient stem cell-derived motor neurons, including SOD1-ALS and TDP-43 models, to ask how disrupted splicing, polyadenylation and cryptic exons change the proteins vulnerable neurons make, and why ALS differs between men and women. We pair this with drug screens to search for compounds that selectively correct disease-associated isoforms.</p>
+            </div>
+          </article>
+          <article class="program-card">
+            <div class="program-figure"><img src="assets/isoform-networks.jpg" width="1275" height="533" loading="lazy" alt="Illustration of tissue-specific protein interaction networks produced by alternative isoforms"></div>
+            <div class="program-body">
+              <span class="program-tag">Isoform function</span>
+              <h3>What does each isoform do?</h3>
+              <p>Most human genes make several protein isoforms. We map how alternative exons and promoters rewire protein interactions and localisation, and how isoform-specific therapies could exploit those differences.</p>
+            </div>
+          </article>
+          <article class="program-card">
+            <div class="program-figure vector">
+              <svg viewBox="0 0 600 300" aria-hidden="true" focusable="false">
+                <g stroke="rgba(122,232,220,.35)" stroke-width="1.5"><line x1="60" y1="80" x2="540" y2="80"/></g>
+                <g fill="#00b9a5"><rect x="60" y="72" width="60" height="16" rx="2"/><rect x="190" y="72" width="44" height="16" rx="2"/><rect x="360" y="72" width="54" height="16" rx="2"/><rect x="480" y="72" width="60" height="16" rx="2"/></g>
+                <rect x="290" y="72" width="14" height="16" rx="2" fill="#ef5b5b"/>
+                <g stroke-linecap="round" stroke-width="6">
+                  <g stroke="rgba(0,185,165,.7)">
+                    <line x1="70" y1="140" x2="120" y2="140"/><line x1="190" y1="140" x2="234" y2="140"/><line x1="360" y1="140" x2="414" y2="140"/><line x1="480" y1="140" x2="530" y2="140"/>
+                    <line x1="60" y1="164" x2="120" y2="164"/><line x1="190" y1="164" x2="234" y2="164"/><line x1="360" y1="164" x2="414" y2="164"/><line x1="480" y1="164" x2="540" y2="164"/>
+                    <line x1="90" y1="188" x2="120" y2="188"/><line x1="190" y1="188" x2="234" y2="188"/><line x1="360" y1="188" x2="414" y2="188"/><line x1="480" y1="188" x2="510" y2="188"/>
+                    <line x1="60" y1="212" x2="120" y2="212"/><line x1="190" y1="212" x2="234" y2="212"/><line x1="360" y1="212" x2="414" y2="212"/><line x1="480" y1="212" x2="540" y2="212"/>
+                    <line x1="110" y1="236" x2="120" y2="236"/><line x1="190" y1="236" x2="234" y2="236"/><line x1="360" y1="236" x2="414" y2="236"/><line x1="480" y1="236" x2="520" y2="236"/>
+                  </g>
+                  <g stroke="#ef5b5b"><line x1="290" y1="164" x2="304" y2="164"/><line x1="290" y1="212" x2="304" y2="212"/></g>
+                </g>
+                <g stroke="rgba(255,255,255,.14)" stroke-width="1">
+                  <line x1="120" y1="140" x2="190" y2="140"/><line x1="234" y1="140" x2="360" y2="140"/><line x1="414" y1="140" x2="480" y2="140"/>
+                  <line x1="120" y1="164" x2="190" y2="164"/><line x1="234" y1="164" x2="290" y2="164"/><line x1="304" y1="164" x2="360" y2="164"/><line x1="414" y1="164" x2="480" y2="164"/>
+                  <line x1="120" y1="188" x2="190" y2="188"/><line x1="234" y1="188" x2="360" y2="188"/><line x1="414" y1="188" x2="480" y2="188"/>
+                  <line x1="120" y1="212" x2="190" y2="212"/><line x1="234" y1="212" x2="290" y2="212"/><line x1="304" y1="212" x2="360" y2="212"/><line x1="414" y1="212" x2="480" y2="212"/>
+                  <line x1="120" y1="236" x2="190" y2="236"/><line x1="234" y1="236" x2="360" y2="236"/><line x1="414" y1="236" x2="480" y2="236"/>
+                </g>
+              </svg>
+            </div>
+            <div class="program-body">
+              <span class="program-tag">Single-cell functional genomics</span>
+              <h3>Testing isoform function, one cell at a time.</h3>
+              <p>We combine CRISPR perturbation with single-cell and long-read sequencing to test what individual isoforms and alternative promoters do, including how they shape cancer cell responses to drugs, and to resolve allele-specific expression such as X chromosome inactivation.</p>
+            </div>
+          </article>
+          <article class="program-card">
+            <div class="program-figure photo"><picture><source type="image/webp" srcset="assets/condensates.webp"><img src="assets/condensates.jpg" width="1200" height="675" loading="lazy" alt="Fluorescence microscopy of a cell showing cytoplasmic RNA condensates in magenta and green"></picture></div>
+            <div class="program-body">
+              <span class="program-tag">RNA compartments</span>
+              <h3>Cells organise RNA without membranes.</h3>
+              <p>We profile what P-bodies and stress granules hold and how their contents shift under stress, including the accumulation of oncogenic mRNAs, linking RNA compartments to translation, cancer and the stress granule pathology seen in ALS.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" aria-labelledby="methods-title">
+      <div class="wrap">
+        <p class="eyebrow">How we work</p>
+        <h2 id="methods-title">Integrated by design.</h2>
+        <p class="lead">The questions determine the method. Our program joins quantitative discovery with experiments that resolve function at isoform and single-cell level.</p>
+        <div class="methods">
+          <div class="method"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6M14 4l-4 16"/></svg><b>Computational biology</b></div>
+          <div class="method"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 7h5M11 7h10M3 12h9M15 12h6M3 17h3M9 17h12"/></svg><b>Transcriptomics and long reads</b></div>
+          <div class="method"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="7" r="2.2"/><circle cx="12" cy="13" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="19" cy="18" r="2.2"/><path d="M7.7 7.6l2.6 3.6M16.2 8.4l-2.6 3M10.4 14.6l-3.8 3M13.8 14.4l3.5 2.6"/></svg><b>Proteomics and interaction networks</b></div>
+          <div class="method"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M8.5 7.7L20 18M8.5 16.3L20 6"/></svg><b>CRISPR perturbation screens</b></div>
+          <div class="method"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="9" cy="10" r="1.6"/><circle cx="14.5" cy="9" r="1.1"/><circle cx="13.5" cy="14.5" r="2"/><circle cx="8.5" cy="15" r="1"/></svg><b>High-content imaging</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white" id="publications" aria-labelledby="publications-title">
+      <div class="wrap">
+        <p class="eyebrow">Selected publications</p>
+        <h2 id="publications-title">Recent and defining work.</h2>
+        <div class="publication-list">
+          <article class="publication"><div class="year">2026</div><div class="title">Lineage-specific X chromosome inactivation escape and skew underlie sex-biased immune gene dosage and deleterious variant exposure<small>Kavanagh D, et al.</small><div class="pub-links"><span class="chip static">Preprint</span><a class="chip" href="https://github.com/weatheritt2/scDaisychain" target="_blank" rel="noopener" aria-label="scDaisychain source code on GitHub">Software: scDaisychain</a></div></div><div class="journal">bioRxiv</div></article>
+          <article class="publication"><div class="year">2026</div><div class="title">Alternative splicing fine-tunes modular protein interfaces to control protein localisation<small>Kjer-Hansen P, et al.</small><div class="pub-links"><span class="chip static">In press</span></div></div><div class="journal">Nature Structural &amp; Molecular Biology</div></article>
+          <article class="publication"><div class="year">2026</div><div class="title"><a href="https://doi.org/10.1038/s41467-026-72124-1" target="_blank" rel="noopener">Isoform-specific m6A deposition and coordinated splicing shape mammalian transcriptome evolution</a><small>Santos-Rodriguez G, et al.</small><div class="pub-links"><a class="chip" href="https://doi.org/10.1038/s41467-026-72124-1" target="_blank" rel="noopener" aria-label="Read on the journal site, DOI 10.1038/s41467-026-72124-1">DOI</a><a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/42014698/" target="_blank" rel="noopener" aria-label="View PMID 42014698 on PubMed">PubMed</a></div></div><div class="journal">Nature Communications</div></article>
+          <article class="publication"><div class="year">2026</div><div class="title"><a href="https://doi.org/10.1093/nar/gkag118" target="_blank" rel="noopener">Isoform-specific single-cell perturb-seq reveals distinct functions of alternative promoters in drug response</a><small>King HE, et al.</small><div class="pub-links"><a class="chip" href="https://doi.org/10.1093/nar/gkag118" target="_blank" rel="noopener" aria-label="Read on the journal site, DOI 10.1093/nar/gkag118">DOI</a><a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/41728950/" target="_blank" rel="noopener" aria-label="View PMID 41728950 on PubMed">PubMed</a></div></div><div class="journal">Nucleic Acids Research</div></article>
+          <article class="publication"><div class="year">2026</div><div class="title"><a href="https://doi.org/10.1016/j.celrep.2026.117203" target="_blank" rel="noopener">Systematic profiling of cytosolic membraneless organelles reveals enrichment of oncogenic mRNA upon oxidative stress</a><small>O'Connell S, et al.</small><div class="pub-links"><a class="chip" href="https://doi.org/10.1016/j.celrep.2026.117203" target="_blank" rel="noopener" aria-label="Read on the journal site, DOI 10.1016/j.celrep.2026.117203">DOI</a><a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/41936051/" target="_blank" rel="noopener" aria-label="View PMID 41936051 on PubMed">PubMed</a></div></div><div class="journal">Cell Reports</div></article>
+          <article class="publication"><div class="year">2024</div><div class="title"><a href="https://doi.org/10.1038/s41573-024-01025-z" target="_blank" rel="noopener">Protein isoform-centric therapeutics: expanding targets and increasing specificity</a><small>Kjer-Hansen P, et al.</small><div class="pub-links"><a class="chip" href="https://doi.org/10.1038/s41573-024-01025-z" target="_blank" rel="noopener" aria-label="Read on the journal site, DOI 10.1038/s41573-024-01025-z">DOI</a><a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/39232238/" target="_blank" rel="noopener" aria-label="View PMID 39232238 on PubMed">PubMed</a></div></div><div class="journal">Nature Reviews Drug Discovery</div></article>
+          <article class="publication"><div class="year">2023</div><div class="title"><a href="https://doi.org/10.1038/s41594-023-01155-9" target="_blank" rel="noopener">The function of alternative splicing in the proteome: rewiring protein interactomes to put old functions into new contexts</a><small>Kjer-Hansen P, et al.</small><div class="pub-links"><a class="chip" href="https://doi.org/10.1038/s41594-023-01155-9" target="_blank" rel="noopener" aria-label="Read on the journal site, DOI 10.1038/s41594-023-01155-9">DOI</a><a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/38036695/" target="_blank" rel="noopener" aria-label="View PMID 38036695 on PubMed">PubMed</a></div></div><div class="journal">Nature Structural &amp; Molecular Biology</div></article>
+          <article class="publication"><div class="year">2022</div><div class="title"><a href="https://doi.org/10.1038/s41586-022-05054-9" target="_blank" rel="noopener">The retroelement Lx9 puts a brake on the immune response to virus infection</a><small>Bartoníček N, et al.</small><div class="pub-links"><a class="chip" href="https://doi.org/10.1038/s41586-022-05054-9" target="_blank" rel="noopener" aria-label="Read on the journal site, DOI 10.1038/s41586-022-05054-9">DOI</a><a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/35948641/" target="_blank" rel="noopener" aria-label="View PMID 35948641 on PubMed">PubMed</a></div></div><div class="journal">Nature</div></article>
+          <article class="publication"><div class="year">2018</div><div class="title"><a href="https://doi.org/10.1016/j.molcel.2018.08.018" target="_blank" rel="noopener">Efficient and accurate quantitative profiling of alternative splicing patterns of any complexity on a laptop</a><small>Sterne-Weiler T, <b>Weatheritt RJ</b>, et al.</small><div class="pub-links"><a class="chip" href="https://doi.org/10.1016/j.molcel.2018.08.018" target="_blank" rel="noopener" aria-label="Read on the journal site, DOI 10.1016/j.molcel.2018.08.018">DOI</a><a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/30220560/" target="_blank" rel="noopener" aria-label="View PMID 30220560 on PubMed">PubMed</a><a class="chip" href="https://github.com/timbitz/Whippet.jl" target="_blank" rel="noopener" aria-label="Whippet source code on GitHub">Software: Whippet</a></div></div><div class="journal">Molecular Cell</div></article>
+          <article class="publication"><div class="year">2017</div><div class="title"><a href="https://doi.org/10.1016/j.cell.2017.06.037" target="_blank" rel="noopener">Regulatory expansion in mammals of multivalent hnRNP assemblies that globally control alternative splicing</a><small>Gueroussov S, <b>Weatheritt RJ</b>, et al.</small><div class="pub-links"><a class="chip" href="https://doi.org/10.1016/j.cell.2017.06.037" target="_blank" rel="noopener" aria-label="Read on the journal site, DOI 10.1016/j.cell.2017.06.037">DOI</a><a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/28709000/" target="_blank" rel="noopener" aria-label="View PMID 28709000 on PubMed">PubMed</a></div></div><div class="journal">Cell</div></article>
+          <article class="publication"><div class="year">2014</div><div class="title"><a href="https://doi.org/10.1016/j.cell.2014.11.035" target="_blank" rel="noopener">A highly conserved program of neuronal microexons is misregulated in autistic brains</a><small>Irimia M, <b>Weatheritt RJ</b>, et al.</small><div class="pub-links"><a class="chip" href="https://doi.org/10.1016/j.cell.2014.11.035" target="_blank" rel="noopener" aria-label="Read on the journal site, DOI 10.1016/j.cell.2014.11.035">DOI</a><a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/25525873/" target="_blank" rel="noopener" aria-label="View PMID 25525873 on PubMed">PubMed</a></div></div><div class="journal">Cell</div></article>
+        </div>
+        <p class="more-link"><a href="https://scholar.google.com/citations?user=SYVANKcAAAAJ" target="_blank" rel="noopener">See all publications on Google Scholar</a></p>
+      </div>
+    </section>
+
+    <section class="section" id="pi" aria-labelledby="pi-title">
+      <div class="wrap pi-panel">
+        <div class="pi-photo"><picture><source type="image/webp" srcset="assets/robert-weatheritt.webp"><img src="assets/robert-weatheritt.jpg" width="497" height="560" loading="lazy" alt="Robert Weatheritt"></picture></div>
+        <div>
+          <p class="eyebrow">Lab head</p>
+          <h2 id="pi-title">Associate Professor Robert Weatheritt</h2>
+          <p class="lead">EMBL Australia Group Leader, Viertel Senior Medical Research Fellow, and Theme Lead in Molecular Cell Biology at UNSW Sydney.</p>
+          <div class="prose">
+            <p>Robert trained in computational biology and neuroscience before completing his doctorate at EMBL and Heidelberg University. His postdoctoral work at the MRC Laboratory of Molecular Biology and the University of Toronto established a research program at the interface of RNA regulation, proteomics and cellular organisation. He founded the Weatheritt Lab in Sydney in 2018.</p>
+            <p>His work has helped show how alternative splicing rewires protein interaction networks and higher-order assemblies, including work defining a conserved program of neuronal microexons and the development of Whippet for fast splicing analysis. The lab now aims to move from cataloguing RNA variation to explaining what individual isoforms do.</p>
+          </div>
+          <ul class="credential-list">
+            <li><strong>2025–2028</strong> Two ARC Discovery Project grants</li>
+            <li><strong>2024–2027</strong> NHMRC Ideas Grant</li>
+            <li><strong>2023–2028</strong> Sylvia and Charles Viertel Senior Medical Research Fellowship</li>
+            <li><strong>2022–2025</strong> NSW Health RNA Future Leaders Grant</li>
+            <li><strong>2022–2025</strong> ARC Future Fellowship</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white" id="people" aria-labelledby="people-title">
+      <div class="wrap">
+        <p class="eyebrow">People</p>
+        <h2 id="people-title">Computational and wet-lab scientists, working side by side.</h2>
+        <div class="team-grid">
+          <div class="person"><button class="person-trigger" type="button" aria-haspopup="dialog" data-bio="Grazi runs the lab&#x27;s wet lab. She established several of our core experimental platforms, including CRISPR perturb-seq and motor neuron differentiation."><div class="portrait"><picture><source type="image/webp" srcset="assets/grazi-vieira.webp"><img src="assets/grazi-vieira.jpg" width="340" height="400" loading="lazy" alt="Grazi Vieira"></picture></div><span class="person-meta"><b>Grazi Vieira</b><span>Lab Manager</span><span class="more">About the project <span aria-hidden="true">+</span></span></span></button></div>
+          <div class="person"><button class="person-trigger" type="button" aria-haspopup="dialog" data-bio="Macarena leads our work on how RNA flow is disrupted in ALS. She is also running drug screens to identify therapeutic targets in SOD1-ALS."><div class="portrait"><picture><source type="image/webp" srcset="assets/macarena-pavez.webp"><img src="assets/macarena-pavez.jpg" width="720" height="846" loading="lazy" alt="Macarena Pavez"></picture></div><span class="person-meta"><b>Macarena Pavez</b><span>Postdoctoral Fellow</span><span class="more">About the project <span aria-hidden="true">+</span></span></span></button></div>
+          <div class="person"><button class="person-trigger" type="button" aria-haspopup="dialog" data-bio="Annelies is developing a pipeline to identify isoform-specific antibodies, with applications in ALS and neuroendocrine cancers."><div class="portrait"><picture><source type="image/webp" srcset="assets/annelies-hardiman.webp"><img src="assets/annelies-hardiman.jpg" width="391" height="460" loading="lazy" alt="Annelies Hardiman"></picture></div><span class="person-meta"><b>Annelies Hardiman</b><span>PhD Student</span><span class="more">About the project <span aria-hidden="true">+</span></span></span></button></div>
+          <div class="person"><button class="person-trigger" type="button" aria-haspopup="dialog" data-bio="Daisy develops single-cell, allele-specific long-read nanopore methods to understand female-biased disorders."><div class="portrait"><picture><source type="image/webp" srcset="assets/daisy-kavanagh.webp"><img src="assets/daisy-kavanagh.jpg" width="720" height="846" loading="lazy" alt="Daisy Kavanagh"></picture></div><span class="person-meta"><b>Daisy Kavanagh</b><span>PhD Student</span><span class="more">About the project <span aria-hidden="true">+</span></span></span></button></div>
+          <div class="person"><button class="person-trigger" type="button" aria-haspopup="dialog" data-bio="Haeyam combines AlphaFold structure prediction with single-cell perturb-seq to disentangle the complex signalling pathways driven by A20."><div class="portrait"><picture><source type="image/webp" srcset="assets/haeyam-taiy.webp"><img src="assets/haeyam-taiy.jpg" width="720" height="846" loading="lazy" alt="Haeyam Taiy"></picture></div><span class="person-meta"><b>Haeyam Taiy</b><span>PhD Student</span><span class="more">About the project <span aria-hidden="true">+</span></span></span></button></div>
+          <div class="person"><button class="person-trigger" type="button" aria-haspopup="dialog" data-bio="Ellen is investigating the roles of transcription start sites in motor neurons derived from people with SOD1-ALS."><div class="portrait" role="img" aria-label="Portrait to come">EB</div><span class="person-meta"><b>Ellen Breynard</b><span>Honours Student</span><span class="more">About the project <span aria-hidden="true">+</span></span></span></button></div>
+          <!-- Add when she starts: <figure class="person"><div class="portrait" role="img" aria-label="Portrait to come">AE</div><figcaption><b>Amy England</b><span>PhD Student</span></figcaption></figure> -->
+        </div>
+        <div class="alumni">
+          <h3>Former members</h3>
+          <ul class="alumni-list">
+            <li><b>Yohaann Mohamed Asif Jafrani</b><span class="lab-role">Postdoc, 2024–2026</span></li>
+            <li><b>Helen King</b><span class="lab-role">PhD student, 2021–2025</span><span>Now Postdoc, King's College, University of Cambridge</span></li>
+            <li><b>Peter Kjer-Hansen</b><span class="lab-role">PhD student, 2020–2025</span><span>Now Postdoc, University of Copenhagen</span></li>
+            <li><b>Javier Fernandez</b><span class="lab-role">Postdoc, 2019–2024</span><span>Now Group Leader, Vow Foods</span></li>
+            <li><b>Gabriela Santos-Rodriguez</b><span class="lab-role">PhD student, 2019–2023</span><span>Now Postdoc, UNSW Sydney</span></li>
+            <li><b>Brandon Sy</b><span class="lab-role">Postdoc, 2020–2022</span><span>Now Grant Manager, UNSW Sydney</span></li>
+            <li><b>Nesli Avgan</b><span class="lab-role">Postdoc, 2018–2020</span><span>Now CEO, SaluStory</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white" id="join" aria-labelledby="join-title">
+      <div class="wrap">
+        <div class="join">
+          <p class="eyebrow" style="color:#063d3b">Join and collaborate</p>
+          <h2 id="join-title">Help us understand what RNA changes mean.</h2>
+          <p>We welcome students and researchers who want to connect computational discovery with molecular and cellular mechanism.</p>
+          <div class="join-grid">
+            <div><h3>PhD and Honours</h3><p>Projects span RNA processing and drug screening in patient stem cell-derived motor neurons, long-read and single-cell analysis, and isoform function in human cells. We particularly welcome applicants from neurodegeneration, neuroscience or stem cell backgrounds. Students enrol through UNSW Sydney.</p></div>
+            <div><h3>Postdoctoral researchers</h3><p>We are glad to discuss positions and to support fellowship applications in RNA biology, functional genomics and computational biology.</p></div>
+            <div><h3>Getting in touch</h3><p>Send a CV and a few lines on which question interests you and why. Collaborators are welcome to reach out directly.</p></div>
+          </div>
+          <a class="button" href="mailto:r.weatheritt@garvan.org.au?subject=Weatheritt%20Lab%20enquiry">Email Robert</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div><h3>Weatheritt Lab</h3><p>Garvan Institute of Medical Research<br>384 Victoria Street<br>Darlinghurst NSW 2010, Australia</p></div>
+        <div><h3>Affiliations</h3><p><a href="https://www.garvan.org.au/" target="_blank" rel="noopener">Garvan Institute</a><br><a href="https://www.emblaustralia.org/" target="_blank" rel="noopener">EMBL Australia</a><br><a href="https://www.unsw.edu.au/" target="_blank" rel="noopener">UNSW Sydney</a></p></div>
+        <div><h3>Contact</h3><p><a href="mailto:r.weatheritt@garvan.org.au">r.weatheritt@garvan.org.au</a><br><a href="https://scholar.google.com/citations?user=SYVANKcAAAAJ" target="_blank" rel="noopener">Google Scholar</a></p></div>
+      </div>
+      <div class="fineprint">
+        <p>We acknowledge the Gadigal people of the Eora Nation, the Traditional Custodians of the land on which we work, and pay our respects to Elders past and present.</p>
+        <p>© 2026 Weatheritt Lab</p>
+      </div>
+    </div>
+  </footer>
+
+  <dialog class="bio-dialog" aria-labelledby="bio-name">
+    <div class="bio-inner">
+      <div class="bio-photo"></div>
+      <div><p class="eyebrow" id="bio-role"></p><h3 id="bio-name"></h3><p id="bio-text"></p></div>
+      <button class="bio-close" type="button" aria-label="Close">&times;</button>
+    </div>
+  </dialog>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const menu = document.querySelector('.nav-links');
+    toggle.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      menu.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }));
+
+    // Sticky header state: solid after the top of the hero; on small screens hide on scroll-down, show on scroll-up
+    const header = document.querySelector('.site-header');
+    const small = window.matchMedia('(max-width: 900px)');
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      header.classList.toggle('scrolled', y > 40);
+      const goingDown = y > lastY && y > 300;
+      header.classList.toggle('hidden', small.matches && goingDown && !menu.classList.contains('open'));
+      lastY = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Highlight the nav link for the section in view
+    const links = [...menu.querySelectorAll('a[href^="#"]')];
+    const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        links.forEach(a => a.toggleAttribute('aria-current', a.getAttribute('href') === '#' + e.target.id));
+        links.forEach(a => { if (a.hasAttribute('aria-current')) a.setAttribute('aria-current', 'true'); });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(sec => spy.observe(sec));
+    // People: short project panel
+    const dlg = document.querySelector('.bio-dialog');
+    document.querySelectorAll('.person-trigger').forEach(btn => btn.addEventListener('click', () => {
+      const portrait = btn.querySelector('.portrait').cloneNode(true);
+      portrait.querySelectorAll('img').forEach(i => i.loading = 'eager');
+      dlg.querySelector('.bio-photo').replaceChildren(portrait);
+      dlg.querySelector('#bio-name').textContent = btn.querySelector('.person-meta b').textContent;
+      dlg.querySelector('#bio-role').textContent = btn.querySelector('.person-meta > span').textContent;
+      dlg.querySelector('#bio-text').textContent = btn.dataset.bio;
+      dlg.showModal();
+    }));
+    dlg.querySelector('.bio-close').addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+  </script>
+</body>
 </html>
